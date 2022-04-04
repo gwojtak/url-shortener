@@ -1,0 +1,265 @@
+{
+    "swagger" : "2.0",
+    "info" : {
+      "version" : "1.0.0",
+      "title" : "URL Shortener API"
+    },
+    "host" : "i8e5iu4as4.execute-api.us-east-2.amazonaws.com",
+    "basePath" : "/Prod",
+    "schemes" : [ "https" ],
+    "paths" : {
+      "/app" : {
+        "get" : {
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Authorization",
+            "in" : "header",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "200 response",
+              "headers" : {
+                "Cache-Control" : {
+                  "type" : "string"
+                },
+                "Access-Control-Allow-Origin" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "security" : [ {
+            "UserAuthorizer" : [ ]
+          } ]
+        },
+        "post" : {
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "Authorization",
+            "in" : "header",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "in" : "body",
+            "name" : "PostBody",
+            "required" : true,
+            "schema" : {
+              "$ref" : "#/definitions/PostBody"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "200 response",
+              "headers" : {
+                "Access-Control-Allow-Origin" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "400" : {
+              "description" : "400 response",
+              "headers" : {
+                "Access-Control-Allow-Origin" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "security" : [ {
+            "UserAuthorizer" : [ ]
+          } ]
+        },
+        "options" : {
+          "consumes" : [ "application/json" ],
+          "responses" : {
+            "200" : {
+              "description" : "200 response",
+              "headers" : {
+                "Access-Control-Allow-Origin" : {
+                  "type" : "string"
+                },
+                "Access-Control-Allow-Methods" : {
+                  "type" : "string"
+                },
+                "Access-Control-Allow-Headers" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/app/{linkId}" : {
+        "put" : {
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "linkId",
+            "in" : "path",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "Authorization",
+            "in" : "header",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "in" : "body",
+            "name" : "PutBody",
+            "required" : true,
+            "schema" : {
+              "$ref" : "#/definitions/PutBody"
+            }
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "200 response",
+              "headers" : {
+                "Access-Control-Allow-Origin" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "400" : {
+              "description" : "400 response",
+              "headers" : {
+                "Access-Control-Allow-Origin" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "security" : [ {
+            "UserAuthorizer" : [ ]
+          } ]
+        },
+        "delete" : {
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "linkId",
+            "in" : "path",
+            "required" : true,
+            "type" : "string"
+          }, {
+            "name" : "Authorization",
+            "in" : "header",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "200 response",
+              "headers" : {
+                "Access-Control-Allow-Origin" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "400" : {
+              "description" : "400 response"
+            }
+          },
+          "security" : [ {
+            "UserAuthorizer" : [ ]
+          } ]
+        },
+        "options" : {
+          "consumes" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "linkId",
+            "in" : "path",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "200" : {
+              "description" : "200 response",
+              "headers" : {
+                "Access-Control-Allow-Origin" : {
+                  "type" : "string"
+                },
+                "Access-Control-Allow-Methods" : {
+                  "type" : "string"
+                },
+                "Access-Control-Allow-Headers" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/{linkId}" : {
+        "get" : {
+          "consumes" : [ "application/json" ],
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "name" : "linkId",
+            "in" : "path",
+            "required" : true,
+            "type" : "string"
+          } ],
+          "responses" : {
+            "301" : {
+              "description" : "301 response",
+              "headers" : {
+                "Cache-Control" : {
+                  "type" : "string"
+                },
+                "Location" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securityDefinitions" : {
+      "UserAuthorizer" : {
+        "type" : "apiKey",
+        "name" : "Authorization",
+        "in" : "header",
+        "x-amazon-apigateway-authtype" : "cognito_user_pools"
+      }
+    },
+    "definitions" : {
+      "PostBody" : {
+        "type" : "object",
+        "required" : [ "id", "url" ],
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string",
+            "pattern" : "^https?://[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)"
+          }
+        }
+      },
+      "PutBody" : {
+        "type" : "object",
+        "required" : [ "id", "owner", "timestamp", "url" ],
+        "properties" : {
+          "owner" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string",
+            "pattern" : "/((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)/"
+          },
+          "timestamp" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
